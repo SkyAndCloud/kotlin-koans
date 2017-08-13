@@ -14,8 +14,10 @@ fun whatFoldDoes(): Int {
 
 fun Shop.getSetOfProductsOrderedByEveryCustomer(): Set<Product> {
     // Return the set of products ordered by every customer
+    val allOrderedProducts = customers.flatMap({it.orderedProducts}).toSet()
     return customers.fold(allOrderedProducts, {
         orderedByAll, customer ->
-        todoCollectionTask()
+        val orderedProducts = customer.orders.flatMap { it.products }.toSet()
+        orderedByAll.intersect(orderedProducts) // [X] intersect [X;C;V] = [X] == retainAll
     })
 }

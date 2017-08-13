@@ -13,5 +13,10 @@ fun todoTask1(collection: Collection<Int>): Nothing = TODO(
 
 
 fun task1(collection: Collection<Int>): String {
-    todoTask1(collection)
+    val s: StringBuilder = StringBuilder()
+    s.append('{')
+    collection.forEach { s.append(it).append(", ") }
+    s.delete(s.length - 2, s.length)
+    s.append('}')
+    return s.toString()
 }
